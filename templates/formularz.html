@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Ustaw datę docelową</title>
+    <!-- Dodawanie stylu i skryptów z jQuery i jQuery UI -->
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <!-- Dodawanie lokalnego stylu z pliku style.css -->
+    <link rel="stylesheet" type="text/css" href="/static/style.css">
+</head>
+
+<body>
+    <div class="container">
+        <!-- Nagłówek strony -->
+        <div class='hea'>
+            <h1>Sprawdź ile czasu pozostało do interesującej Cię daty!</h1>
+        </div>
+        <!-- Formularz do ustawiania daty docelowej -->
+        <div class='formularz'>
+            <h1>Ustaw datę docelową:</h1>
+            
+            <!-- Formularz do ustawiania daty i dodatkowych parametrów -->
+            <form action="/" method="post" enctype="multipart/form-data">
+                <!-- Pozostałe pola formularza -->
+                Rok: <input type="text" name="rok" id="rok"><br>
+                Miesiąc: <input type="text" name="miesiac" id="miesiac"><br>
+                Dzień: <input type="text" name="dzien" id="dzien"><br>
+                Godzina: <input type="text" name="godzina" id="godzina"><br>
+                Minuta: <input type="text" name="minuta" id="minuta"><br>
+                Sekunda: <input type="text" name="sekunda" id="sekunda"><br>
+                
+                <!-- Dodanie rozwijanej listy z formatami daty -->
+                Format daty:
+                <select name="format" id="format">
+                    <option value="YYYY-MM-DD">YYYY-MM-DD</option>
+                    <option value="DD/MM/YYYY">DD/MM/YYYY</option>
+                    <option value="MM/DD/YYYY">MM/DD/YYYY</option>
+                </select><br>
+                
+                Dodatkowy tekst: <input type="text" name="dodatkowy_tekst" id="dodatkowy_tekst"
+                    placeholder="Dodatkowy tekst"><br>
+                Data: <input type="text" name="data" id="datepicker" style="display: none;">
+                
+                <!-- Ikona kalendarza, po kliknięciu otwiera kalendarz -->
+                <span class="calendar-icon" id="calendar-icon">📅</span><br>
+                <input type="submit" value="Ustaw datę">
+                <br><br>
+                <!-- Pole do wyboru pliku z datą -->
+                <label for="plik_z_datą">Wybierz datę z pliku:</label>
+                <input type="file" name="plik_z_datą" accept=".txt">
+            </form>
+        </div>
+        
+        <!-- Przykładowe wydarzenia z przyszłości do wybrania -->
+        <div class=przyklady>
+            <h2>Wybierz przykładowe wydarzenie z przyszłości:</h2>
+            <form action="/ustaw_wakacje" method="get">
+                <input type="submit" value="Wakacje 2024"><br><br>
+            </form>
+            <form action="/BN" method="get">
+                <input type="submit" value="Święta Bożego Narodzenia 2023"><br><br>
+            </form>
+            <form action="/WN" method="get">
+                <input type="submit" value="Święta Wielkanocne 2024"><br><br>
+            </form>
+        </div>
+    </div>
+    
+    <!-- Skrypt JavaScript do obsługi kalendarza i ustawiania pól daty -->
+    <script>
+        $(function () {
+            var datePicker = $("#datepicker");
+            var calendarIcon = $("#calendar-icon");
+
+            // Po kliknięciu ikony kalendarza, pokaż kalendarz
+            calendarIcon.on("click", function () {
+                datePicker.datepicker("show");
+            });
+
+            // Ustawienia kalendarza jQuery UI
+            datePicker.datepicker({
+                dateFormat: "yy-mm-dd",
+                onSelect: function (dateText) {
+                    // Po wybraniu daty, ustaw odpowiednie wartości w polach daty
+                    var selectedDate = new Date(dateText);
+                    $("#rok").val(selectedDate.getFullYear());
+                    $("#miesiac").val(selectedDate.getMonth() + 1);
+                    $("#dzien").val(selectedDate.getDate());
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>

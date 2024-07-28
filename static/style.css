@@ -1,0 +1,72 @@
+.container {
+    background-color: lightgray;
+    width: 100vw;
+    height: 100vh;
+}
+
+
+.formularz{
+    float: left;
+    background-color: lightgray;
+    text-align: center;
+    width: 50%;
+    height: 90%;  
+}
+
+
+
+.przyklady{
+    float: left;
+    background-color: lightgray;
+    text-align: center;
+    width: 46%;
+    height: 90%;
+    padding-left: 2%;
+    padding-right: 2%;
+}
+
+
+.hea {
+    background-color: lightslategray;
+    font-size: 1em;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    color: white;
+    padding: 8px 5px 8px 5px;
+    text-align: center;
+    height: 20%;
+}
+
+.all {
+    background-color: lightgrey;
+    text-align: center;
+    width: 100%;
+    height: 90%; 
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#czas {
+    font-size: 50px;
+    border: 4px solid #3606e4;
+    border-radius: 50%;
+    padding: 40px;
+    width: 400px;
+    height: 200px;
+    margin-top: 20px;
+    background-color: aqua;
+    margin-left: 750px;
+}
+
+input[type="submit"] {
+    background-color: hsl(229, 38%, 28%);
+    color: #ffffff;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+    margin-top: 20px;
+}
+
+.calendar-icon {
+    display: inline-block;
+    cursor: pointer;
+}

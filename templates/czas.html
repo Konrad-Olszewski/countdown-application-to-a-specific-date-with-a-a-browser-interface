@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <!-- Tytuł strony -->
+    <title>Czas</title>
+    
+    <!-- Dodanie lokalnego stylu z pliku style.css -->
+    <link rel="stylesheet" type="text/css" href="/static/style.css">
+</head>
+
+<body>
+    <div class="container">
+        <!-- Nagłówek strony z przyciskiem powrotu do formularza -->
+        <div class='hea'>
+            <h1>Sprawdź ile czasu pozostało do interesującej Cię daty!
+                <!-- Przycisk powrotu do formularza -->
+                <form action="/powrot_do_formularza" method="get">
+                    <input type="submit" value="Powrót do formularza">
+                </form>
+            </h1>
+        </div>
+        
+        <div class="all">
+            <!-- Wyświetlenie informacji o docelowej dacie -->
+            {% if dodatkowy_tekst %}
+                <h1>Do '{{ dodatkowy_tekst }}' ({{docelowa_data.strftime(format_daty)}}) pozostało jeszcze</h1>
+            {% else %}
+                <h1>Do {{docelowa_data.strftime(format_daty)}} pozostało jeszcze</h1>
+            {% endif %}
+            
+            <!-- Wyświetlenie aktualnego czasu w formie odliczania -->
+            <div id="czas"></div>
+        </div>
+    </div>
+
+    <!-- Skrypt JavaScript do aktualizacji czasu co sekundę -->
+    <script>
+        function updateTimer() {
+            const timerElement = document.getElementById("czas");
+
+            // Aktualizacja czasu co sekundę
+            setInterval(function() {
+                // Wywołanie endpointu /aktualny_czas w celu pobrania aktualnego czasu
+                fetch('/aktualny_czas')
+                    .then(response => response.json())
+                    .then(data => {
+                        // Aktualizacja elementu HTML z aktualnym czasem
+                        timerElement.textContent = data.czas;
+                    });
+            }, 1000);
+        }
+
+        // Uruchomienie funkcji updateTimer po załadowaniu strony
+        window.onload = updateTimer;
+    </script>
+</body>
+
+</html>
